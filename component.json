@@ -1,0 +1,24 @@
+{
+  "name": "noflo-physics",
+  "description": "Physics components for NoFlo",
+  "author": "Henri Bergius <henri.bergius@iki.fi>",
+  "repo": "noflo/noflo-physics",
+  "version": "0.1.0",
+  "keywords": [
+  ],
+  "dependencies": {
+    "noflo/noflo": "*"
+  },
+  "scripts": [
+    "components/Spring.coffee",
+    "index.js"
+  ],
+  "json": [
+    "component.json"
+  ],
+  "noflo": {
+    "components": {
+      "Spring": "components/Spring.coffee"
+    }
+  }
+}
