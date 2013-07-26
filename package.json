@@ -16,6 +16,11 @@
       "url": "undefined/blob/master/LICENSE-MIT"
     }
   ],
+  "noflo": {
+    "components": {
+      "Spring": "components/Spring.coffee"
+    }
+  },
   "dependencies": {
     "noflo": "~0.3.3"
   },
@@ -34,5 +39,8 @@
     "grunt-combine": "~0.8.3",
     "grunt-component": "~0.1.2"
   },
-  "keywords": []
+  "keywords": [],
+  "scripts": {
+    "test": "grunt test"
+  }
 }
