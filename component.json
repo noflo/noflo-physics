@@ -17,6 +17,7 @@
     "component.json"
   ],
   "noflo": {
+    "icon": "cogs",
     "components": {
       "Spring": "components/Spring.coffee"
     }
