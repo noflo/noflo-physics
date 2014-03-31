@@ -38,8 +38,11 @@ module.exports = ->
         input: 'browser/noflo-physics.js'
         output: 'browser/noflo-physics.js'
         tokens: [
-          token: '.coffee'
-          string: '.js'
+          token: '.coffee"'
+          string: '.js"'
+        ,
+          token: ".coffee'"
+          string: ".js'"
         ]
 
     # JavaScript minification for the browser
