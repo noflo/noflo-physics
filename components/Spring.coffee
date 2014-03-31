@@ -1,8 +1,7 @@
-if typeof process is 'object' and process.title is 'node'
-  noflo = require "noflo"
+noflo = require 'noflo'
+unless noflo.isBrowser()
   requestAnimFrame = process.nextTick
 else
-  noflo = require 'noflo'
   requestAnimFrame = window.requestAnimationFrame or
     window.webkitRequestAnimationFrame or
     window.mozRequestAnimationFrame or
