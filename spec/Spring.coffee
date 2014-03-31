@@ -1,5 +1,6 @@
-socket = require('noflo').internalSocket
-if typeof process is 'object' and process.title is 'node'
+noflo = require 'noflo'
+socket = noflo.internalSocket
+unless noflo.isBrowser()
   chai = require 'chai' unless chai
   spring = require '../components/Spring.coffee'
 else
