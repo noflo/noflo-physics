@@ -1,24 +1,34 @@
 noflo = require 'noflo'
 socket = noflo.internalSocket
 unless noflo.isBrowser()
-  chai = require 'chai' unless chai
-  spring = require '../components/Spring.coffee'
+  chai = require 'chai'
+  path = require 'path'
+  baseDir = path.resolve __dirname, '../'
 else
-  spring = require 'noflo-physics/components/Spring.js'
+  baseDir = 'noflo-physics'
 
 describe 'Spring component', ->
   c = null
   ins = null
   anchor = null
   out = null
-  beforeEach ->
-    c = spring.getComponent()
-    ins = socket.createSocket()
-    anchor = socket.createSocket()
-    out = socket.createSocket()
-    c.inPorts.in.attach ins
-    c.inPorts.anchor.attach anchor
-    c.outPorts.out.attach out
+  loader = null
+  before ->
+    loader = new noflo.ComponentLoader baseDir
+  beforeEach (done) ->
+    @timeout 4000
+    loader.load 'physics/Spring', (err, instance) ->
+      return done err if err
+      c = instance
+      ins = socket.createSocket()
+      anchor = socket.createSocket()
+      out = socket.createSocket()
+      c.inPorts.in.attach ins
+      c.inPorts.anchor.attach anchor
+      c.outPorts.out.attach out
+      done()
+  afterEach ->
+    c.outPorts.out.detach out
 
   describe 'with default anchor position', ->
     describe 'with rest state', ->
