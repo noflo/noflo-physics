@@ -18,7 +18,7 @@
     }
   },
   "dependencies": {
-    "noflo": "~0.6.0"
+    "noflo": "0.x >= 0.5"
   },
   "devDependencies": {
     "grunt": "~1.0.1",
