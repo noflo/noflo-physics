@@ -10,12 +10,7 @@
     "type": "git",
     "url": "git://github.com/noflo/noflo-physics.git"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "undefined/blob/master/LICENSE-MIT"
-    }
-  ],
+  "license": "MIT",
   "noflo": {
     "icon": "cogs",
     "components": {
