@@ -1,5 +1,13 @@
 language: node_js
 node_js:
-  - '4.6'
+- '4.6'
 before_script:
-  - npm install -g grunt-cli
+- npm install -g grunt-cli
+deploy:
+  provider: npm
+  email: henri.bergius@iki.fi
+  api_key:
+    secure: kbYUHXfDm85a0njUnPeEKiO8ngUmaH0KDB5762cWK9Y1U5lwRhFcnCy/ju0R8uZazGMiivLmdJ8tnJ6601yVe5ymAhT1Waai3xkzxEBdz+taQj5LP24HVSANMVdDfDDP96p/BGUkQcw77gQkx5ibinYUNr6LDNB5I/GnCh3qZ44=
+  on:
+    tags: true
+    repo: noflo/noflo-physics
