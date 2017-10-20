@@ -18,7 +18,7 @@ module.exports = ->
     noflo_browser:
       build:
         files:
-          'browser/noflo-physics.js': ['component.json']
+          'browser/noflo-physics.js': ['package.json']
 
     # JavaScript minification for the browser
     uglify:
@@ -52,7 +52,13 @@ module.exports = ->
 
     # Coding standards
     coffeelint:
-      components: ['components/*.coffee']
+      components:
+        files:
+          src: ['components/*.coffee']
+        options:
+          max_line_length:
+            value: 80
+            level: 'ignore'
 
   # Grunt plugins used for building
   @loadNpmTasks 'grunt-contrib-coffee'

@@ -10,25 +10,22 @@ else
 describe 'Spring component', ->
   c = null
   ins = null
-  anchor = null
   out = null
-  loader = null
-  before ->
-    loader = new noflo.ComponentLoader baseDir
-  beforeEach (done) ->
+  before (done) ->
     @timeout 4000
+    loader = new noflo.ComponentLoader baseDir
     loader.load 'physics/Spring', (err, instance) ->
       return done err if err
       c = instance
       ins = socket.createSocket()
-      anchor = socket.createSocket()
-      out = socket.createSocket()
       c.inPorts.in.attach ins
-      c.inPorts.anchor.attach anchor
-      c.outPorts.out.attach out
-      done()
-  afterEach ->
+      c.start done
+  beforeEach ->
+    out = socket.createSocket()
+    c.outPorts.out.attach out
+  afterEach (done) ->
     c.outPorts.out.detach out
+    c.shutdown done
 
   describe 'with default anchor position', ->
     describe 'with rest state', ->
@@ -49,7 +46,7 @@ describe 'Spring component', ->
         out.on 'data', (position) ->
           changes++
           lastPosition = position
-        out.once 'disconnect', ->
+          return if changes < 24
           chai.expect(lastPosition).to.equal 0
           chai.expect(changes).to.equal 24
           done()
@@ -62,13 +59,19 @@ describe 'Spring component', ->
         out.on 'data', (position) ->
           changes++
           lastPosition = position
-        out.once 'disconnect', ->
+          return if changes < 24
           chai.expect(lastPosition).to.equal 0
           chai.expect(changes).to.equal 24
           done()
         ins.send -100
 
   describe 'with custom anchor position of 200', ->
+    anchor = null
+    before ->
+      anchor = socket.createSocket()
+      c.inPorts.anchor.attach anchor
+    after ->
+      c.inPorts.anchor.detach anchor
     describe 'with rest state', ->
       it 'should not move', (done) ->
         anchor.send 200
@@ -90,21 +93,21 @@ describe 'Spring component', ->
         out.on 'data', (position) ->
           changes++
           lastPosition = position
-        out.once 'disconnect', ->
+          return if changes < 24
           chai.expect(lastPosition).to.equal 200
           chai.expect(changes).to.equal 24
           done()
         ins.send 300
 
     describe 'pulled to 700', ->
-      it 'should move 24 times', (done) ->
+      it 'should move 31 times', (done) ->
         anchor.send 200
         changes = 0
         lastPosition = null
         out.on 'data', (position) ->
           changes++
           lastPosition = position
-        out.once 'disconnect', ->
+          return if changes < 31
           chai.expect(lastPosition).to.equal 200
           chai.expect(changes).to.equal 31
           done()
