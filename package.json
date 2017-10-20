@@ -12,13 +12,10 @@
   },
   "license": "MIT",
   "noflo": {
-    "icon": "cogs",
-    "components": {
-      "Spring": "components/Spring.coffee"
-    }
+    "icon": "cogs"
   },
   "dependencies": {
-    "noflo": "0.x >= 0.5"
+    "noflo": "0.x >= 0.8"
   },
   "devDependencies": {
     "chai": "^4.0.0",
