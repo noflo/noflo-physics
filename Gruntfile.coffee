@@ -20,14 +20,6 @@ module.exports = ->
         files:
           'browser/noflo-physics.js': ['package.json']
 
-    # JavaScript minification for the browser
-    uglify:
-      options:
-        report: 'min'
-      noflo:
-        files:
-          './browser/noflo-physics.min.js': ['./browser/noflo-physics.js']
-
     # Automated recompilation and testing when developing
     watch:
       files: ['spec/*.coffee', 'components/*.coffee']
@@ -63,7 +55,6 @@ module.exports = ->
   # Grunt plugins used for building
   @loadNpmTasks 'grunt-contrib-coffee'
   @loadNpmTasks 'grunt-noflo-browser'
-  @loadNpmTasks 'grunt-contrib-uglify'
 
   # Grunt plugins used for testing
   @loadNpmTasks 'grunt-contrib-watch'
@@ -76,7 +67,6 @@ module.exports = ->
     @task.run 'coffee'
     if target is 'all' or target is 'browser'
       @task.run 'noflo_browser'
-      @task.run 'uglify'
 
   @registerTask 'test', 'Build NoFlo and run automated tests', (target = 'all') =>
     @task.run 'coffeelint'
